@@ -1,0 +1,423 @@
+/* style.css */
+:root {
+    --bg-color: #f1f5f9;
+    --sidebar-bg: #ffffff;
+    --border-color: #cbd5e1;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    
+    --page-width: 210mm;
+    --page-height: 297mm;
+    --page-padding: 20mm;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 350px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+}
+
+.sidebar h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+legend {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 0 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+.form-group input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.btn-print {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: auto;
+}
+
+.btn-print:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Preview Area Styles */
+.preview-area {
+    flex-grow: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.quotation-page {
+    width: var(--page-width);
+    min-height: var(--page-height);
+    background: #ffffff;
+    padding: var(--page-padding);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Quotation Content Styles */
+.q-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.q-ganesh {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.q-header-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.q-logo-container {
+    width: 80px;
+}
+
+.q-logo-img {
+    max-width: 80px;
+    max-height: 80px;
+    display: block;
+    object-fit: contain;
+}
+
+.q-title-section {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.q-company-name {
+    font-family: 'Tinos', serif;
+    margin: 0;
+    line-height: 1.1;
+    font-size: 28px;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.q-address {
+    font-size: 11px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.q-contact {
+    font-size: 13px;
+    font-weight: 500;
+    text-align: right;
+    min-width: 120px;
+}
+
+.q-header-bottom-line {
+    border-bottom: 2px solid #000;
+    margin-top: 5px;
+}
+
+.q-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.dotted-underline {
+    display: inline-block;
+    min-width: 150px;
+    border-bottom: 1px dotted #000;
+    min-height: 20px;
+    vertical-align: bottom;
+    padding-left: 10px;
+}
+
+.q-to-section {
+    margin-top: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.address-line {
+    border-bottom: 1px solid #000;
+    min-height: 24px;
+    width: 300px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+.address-line:empty::before {
+    content: "\200b"; 
+}
+
+.q-quotation-title {
+    font-family: 'Tinos', serif;
+    font-style: italic;
+    font-size: 28px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #000;
+    font-weight: normal;
+}
+
+.q-rates-section {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 18px;
+    line-height: 2;
+}
+
+.q-rates-list {
+    margin-bottom: 20px;
+}
+
+.q-rates-list li {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.rate-row {
+    display: flex;
+}
+
+.rate-name {
+    width: 250px;
+}
+
+.rate-value {
+    flex-grow: 1;
+    border-bottom: 1px dotted #000;
+    min-height: 24px;
+    padding-left: 10px;
+}
+
+.q-gst-note {
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.q-footer {
+    position: absolute;
+    bottom: var(--page-padding);
+    left: var(--page-padding);
+    right: var(--page-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.q-footer-left {
+    font-size: 14px;
+    line-height: 1.8;
+}
+.q-footer-left ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.q-footer-right {
+    text-align: right;
+    font-size: 15px;
+}
+
+.q-for-company {
+    font-weight: 600;
+    margin-bottom: 60px;
+}
+
+.q-proprietor {
+    font-weight: 600;
+}
+
+/* Print Styles */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    
+    body {
+        background: none;
+    }
+    
+    .no-print, .sidebar {
+        display: none !important;
+    }
+    
+    .app-container {
+        display: block;
+    }
+    
+    .preview-area {
+        padding: 0;
+        height: auto;
+        overflow: visible;
+        display: block;
+    }
+    
+    .quotation-page {
+        width: 100%;
+        height: 100vh;
+        box-shadow: none;
+        padding: var(--page-padding);
+        margin: 0;
+        page-break-after: avoid;
+    }
+}
+
+/* Password Overlay Styles */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password-modal {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.password-logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.password-modal h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.password-modal p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.password-modal input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.password-modal input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.password-modal button {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.password-modal button:hover {
+    background-color: var(--accent-hover);
+}
+
+.password-error {
+    color: #ef4444 !important;
+    margin-top: 10px;
+    margin-bottom: 0 !important;
+}
