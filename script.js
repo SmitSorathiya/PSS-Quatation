@@ -1,4 +1,34 @@
-// script.js
+// Function to dynamically reframe the quotation so it fits perfectly on a single A4 page
+function reframeQuotation() {
+    const page = document.getElementById('quotationPage');
+    const inner = document.getElementById('quotationInner');
+    if (!page || !inner) return;
+
+    // Reset styles to measure natural unconstrained content height
+    page.classList.remove('compact-1', 'compact-2', 'compact-3');
+    inner.style.transform = '';
+
+    // Height available inside quotationPage
+    const availableHeight = inner.clientHeight;
+    
+    // Check if content exceeds available height (with 2px tolerance)
+    if (inner.scrollHeight > availableHeight + 2) {
+        page.classList.add('compact-1');
+    }
+    if (inner.scrollHeight > availableHeight + 2) {
+        page.classList.remove('compact-1');
+        page.classList.add('compact-2');
+    }
+    if (inner.scrollHeight > availableHeight + 2) {
+        page.classList.remove('compact-2');
+        page.classList.add('compact-3');
+    }
+    if (inner.scrollHeight > availableHeight + 2) {
+        // If content still exceeds even after compacting, scale inner proportionally
+        const scale = Math.floor((availableHeight / inner.scrollHeight) * 1000) / 1000;
+        inner.style.transform = `scale(${scale})`;
+    }
+}
 
 // Function to setup live binding between input and output elements
 function bindInput(inputId, outputId, isDate = false) {
@@ -18,6 +48,7 @@ function bindInput(inputId, outputId, isDate = false) {
             } else {
                 outputEl.textContent = this.value;
             }
+            reframeQuotation();
         });
         
         // Initial setup
@@ -37,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkPassword() {
         if (passwordInput.value === 'pss2026') {
             passwordOverlay.style.display = 'none';
+            setTimeout(reframeQuotation, 50);
         } else {
             passwordError.style.display = 'block';
             passwordInput.value = '';
@@ -79,4 +111,38 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Trigger input event to update preview
     dateInput.dispatchEvent(new Event('input'));
+
+    // Signature Toggle
+    const signatureCheckbox = document.getElementById('includeSignature');
+    const signatureImg = document.getElementById('outSignatureImg');
+    const signatureArea = document.getElementById('outSignatureArea');
+
+    function updateSignature() {
+        if (!signatureCheckbox || !signatureImg) return;
+        const isChecked = signatureCheckbox.checked;
+        signatureImg.style.display = isChecked ? 'block' : 'none';
+        if (signatureArea) {
+            if (isChecked) {
+                signatureArea.classList.add('has-signature');
+            } else {
+                signatureArea.classList.remove('has-signature');
+            }
+        }
+        reframeQuotation();
+    }
+
+    if (signatureCheckbox) {
+        signatureCheckbox.addEventListener('change', updateSignature);
+        signatureCheckbox.addEventListener('click', updateSignature);
+        signatureCheckbox.addEventListener('input', updateSignature);
+        updateSignature();
+    }
+
+    // Window events for reframing
+    window.addEventListener('resize', reframeQuotation);
+    window.addEventListener('beforeprint', reframeQuotation);
+    window.addEventListener('afterprint', reframeQuotation);
+
+    // Initial reframe
+    setTimeout(reframeQuotation, 100);
 });

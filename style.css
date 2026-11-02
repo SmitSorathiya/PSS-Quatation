@@ -10,7 +10,18 @@
     
     --page-width: 210mm;
     --page-height: 297mm;
-    --page-padding: 20mm;
+    --page-padding: 14mm 16mm;
+
+    --gap-header: 16px;
+    --gap-meta: 12px;
+    --gap-to: 18px;
+    --gap-title-top: 22px;
+    --gap-title-bottom: 22px;
+    --gap-rates-bottom: 15px;
+    --gap-rate-item: 8px;
+    --gap-gst: 14px;
+    --gap-footer-top: 14px;
+    --gap-signature: 45px;
 }
 
 * {
@@ -93,6 +104,41 @@ legend {
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container:hover {
+    background: #f1f5f9;
+    border-color: var(--accent-color);
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-color);
+    cursor: pointer;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.checkbox-container label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin: 0;
+    user-select: none;
+}
+
 .btn-print {
     background-color: var(--accent-color);
     color: white;
@@ -122,41 +168,58 @@ legend {
 
 .quotation-page {
     width: var(--page-width);
-    min-height: var(--page-height);
+    height: var(--page-height);
+    max-height: var(--page-height);
     background: #ffffff;
     padding: var(--page-padding);
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     position: relative;
     color: #000;
     font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.quotation-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transform-origin: top center;
+    transition: transform 0.15s ease-out;
 }
 
 /* Quotation Content Styles */
 .q-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--gap-header);
     position: relative;
+    flex-shrink: 0;
 }
 
 .q-ganesh {
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .q-header-main {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
 }
 
 .q-logo-container {
-    width: 80px;
+    width: 75px;
+    flex-shrink: 0;
 }
 
 .q-logo-img {
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 75px;
+    max-height: 75px;
     display: block;
     object-fit: contain;
 }
@@ -171,7 +234,7 @@ legend {
     font-family: 'Tinos', serif;
     margin: 0;
     line-height: 1.1;
-    font-size: 28px;
+    font-size: 26px;
     color: #000;
     font-weight: bold;
     text-transform: uppercase;
@@ -180,7 +243,7 @@ legend {
 
 .q-address {
     font-size: 11px;
-    margin-top: 5px;
+    margin-top: 4px;
     line-height: 1.4;
 }
 
@@ -189,41 +252,60 @@ legend {
     font-weight: 500;
     text-align: right;
     min-width: 120px;
+    flex-shrink: 0;
 }
 
 .q-header-bottom-line {
     border-bottom: 2px solid #000;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .q-meta {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: var(--gap-meta);
     font-size: 14px;
+    flex-shrink: 0;
 }
 
 .dotted-underline {
     display: inline-block;
     min-width: 150px;
+    max-width: 250px;
     border-bottom: 1px dotted #000;
     min-height: 20px;
     vertical-align: bottom;
     padding-left: 10px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .q-to-section {
-    margin-top: 30px;
-    font-size: 16px;
-    line-height: 1.6;
+    margin-top: var(--gap-to);
+    font-size: 15px;
+    line-height: 1.5;
+    flex-shrink: 0;
+}
+
+#outToManager {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: inline-block;
+    max-width: 100%;
 }
 
 .address-line {
     border-bottom: 1px solid #000;
-    min-height: 24px;
-    width: 300px;
-    margin-top: 5px;
+    min-height: 22px;
+    width: 340px;
+    max-width: 100%;
+    margin-top: 4px;
     padding-left: 5px;
+    padding-bottom: 2px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.4;
 }
 .address-line:empty::before {
     content: "\200b"; 
@@ -232,81 +314,177 @@ legend {
 .q-quotation-title {
     font-family: 'Tinos', serif;
     font-style: italic;
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: var(--gap-title-top);
+    margin-bottom: var(--gap-title-bottom);
     color: #000;
     font-weight: normal;
+    flex-shrink: 0;
 }
 
 .q-rates-section {
-    padding-left: 40px;
-    padding-right: 40px;
-    font-size: 18px;
-    line-height: 2;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+    line-height: 1.7;
+    flex-shrink: 0;
 }
 
 .q-rates-list {
-    margin-bottom: 20px;
+    margin-bottom: var(--gap-rates-bottom);
 }
 
 .q-rates-list li {
-    padding-left: 20px;
-    margin-bottom: 10px;
+    padding-left: 15px;
+    margin-bottom: var(--gap-rate-item);
 }
 
 .rate-row {
     display: flex;
+    align-items: baseline;
+    width: 100%;
 }
 
 .rate-name {
-    width: 250px;
+    width: 220px;
+    flex-shrink: 0;
+    line-height: 1.4;
 }
 
 .rate-value {
-    flex-grow: 1;
+    flex: 1 1 0;
+    min-width: 0;
     border-bottom: 1px dotted #000;
-    min-height: 24px;
-    padding-left: 10px;
+    min-height: 22px;
+    padding-left: 8px;
+    padding-bottom: 2px;
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-decoration: underline dotted #000;
+    text-underline-offset: 3px;
 }
 
 .q-gst-note {
-    margin-top: 20px;
-    margin-left: 25px;
+    margin-top: var(--gap-gst);
+    margin-left: 15px;
+    font-size: 15px;
 }
 
 .q-footer {
-    position: absolute;
-    bottom: var(--page-padding);
-    left: var(--page-padding);
-    right: var(--page-padding);
+    margin-top: auto;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    padding-top: var(--gap-footer-top);
+    flex-shrink: 0;
 }
 
 .q-footer-left {
-    font-size: 14px;
-    line-height: 1.8;
+    font-size: 13px;
+    line-height: 1.6;
 }
 .q-footer-left ol {
     list-style-type: decimal;
-    padding-left: 20px;
+    padding-left: 18px;
 }
 
 .q-footer-right {
     text-align: right;
-    font-size: 15px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .q-for-company {
     font-weight: 600;
-    margin-bottom: 60px;
+}
+
+.q-signature-area {
+    height: var(--gap-signature);
+    min-height: var(--gap-signature);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+}
+
+.q-signature-img {
+    height: 52px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    margin-right: 15px;
 }
 
 .q-proprietor {
     font-weight: 600;
+}
+
+/* Auto-reframing compact levels when content is dense */
+.quotation-page.compact-1 {
+    --page-padding: 11mm 14mm;
+    --gap-header: 12px;
+    --gap-meta: 8px;
+    --gap-to: 12px;
+    --gap-title-top: 14px;
+    --gap-title-bottom: 14px;
+    --gap-rates-bottom: 10px;
+    --gap-rate-item: 5px;
+    --gap-gst: 8px;
+    --gap-footer-top: 8px;
+    --gap-signature: 32px;
+}
+
+.quotation-page.compact-2 {
+    --page-padding: 8mm 12mm;
+    --gap-header: 8px;
+    --gap-meta: 6px;
+    --gap-to: 8px;
+    --gap-title-top: 10px;
+    --gap-title-bottom: 10px;
+    --gap-rates-bottom: 6px;
+    --gap-rate-item: 4px;
+    --gap-gst: 6px;
+    --gap-footer-top: 6px;
+    --gap-signature: 22px;
+}
+.quotation-page.compact-2 .q-rates-section {
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.quotation-page.compact-3 {
+    --page-padding: 6mm 10mm;
+    --gap-header: 6px;
+    --gap-meta: 4px;
+    --gap-to: 6px;
+    --gap-title-top: 6px;
+    --gap-title-bottom: 6px;
+    --gap-rates-bottom: 4px;
+    --gap-rate-item: 3px;
+    --gap-gst: 4px;
+    --gap-footer-top: 4px;
+    --gap-signature: 16px;
+}
+.quotation-page.compact-3 .q-rates-section {
+    font-size: 14px;
+    line-height: 1.35;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.quotation-page.compact-3 .q-to-section {
+    font-size: 14px;
+}
+.quotation-page.compact-3 .q-quotation-title {
+    font-size: 21px;
 }
 
 /* Responsive Styles */
@@ -333,36 +511,82 @@ legend {
 /* Print Styles */
 @media print {
     @page {
-        size: A4;
+        size: A4 portrait;
         margin: 0;
     }
     
-    body {
-        background: none;
+    *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
     
-    .no-print, .sidebar {
+    html, body {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+    
+    .no-print, 
+    .sidebar, 
+    #passwordOverlay, 
+    .password-overlay {
         display: none !important;
     }
     
     .app-container {
-        display: block;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        width: 210mm !important;
+        border: none !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
     }
     
     .preview-area {
-        padding: 0;
-        height: auto;
-        overflow: visible;
-        display: block;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        width: 210mm !important;
+        overflow: hidden !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
     }
     
     .quotation-page {
-        width: 100%;
-        height: 100vh;
-        box-shadow: none;
-        padding: var(--page-padding);
-        margin: 0;
-        page-break-after: avoid;
+        width: 210mm !important;
+        height: 296.5mm !important;
+        max-height: 296.5mm !important;
+        min-height: 296.5mm !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: var(--page-padding) !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .quotation-inner {
+        width: 100% !important;
+        height: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 

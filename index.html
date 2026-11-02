@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfect Security Services - Quotation Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Password Overlay -->
-    <div id="passwordOverlay" class="password-overlay">
+    <div id="passwordOverlay" class="password-overlay no-print">
         <div class="password-modal">
             <img src="logo.png" alt="Logo" class="password-logo">
             <h2>Perfect Security Services</h2>
@@ -82,110 +82,123 @@
                 </div>
             </fieldset>
 
+            <fieldset>
+                <legend>Signature Option</legend>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="includeSignature">
+                    <label for="includeSignature">Include Signature on Bill</label>
+                </div>
+            </fieldset>
+
             <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
         </aside>
 
         <!-- Main content area for preview -->
         <main class="preview-area">
             <div class="quotation-page" id="quotationPage">
-                <!-- Header -->
-                <div class="q-header">
-                    <div class="q-ganesh">|| Shree Ganeshay Nmh ||</div>
-                    <div class="q-header-main">
-                        <div class="q-logo-container">
-                            <img src="logo.png" alt="Logo" class="q-logo-img">
+                <div class="quotation-inner" id="quotationInner">
+                    <!-- Header -->
+                    <div class="q-header">
+                        <div class="q-ganesh">|| Shree Ganeshay Nmh ||</div>
+                        <div class="q-header-main">
+                            <div class="q-logo-container">
+                                <img src="logo.png" alt="Logo" class="q-logo-img">
+                            </div>
+                            <div class="q-title-section">
+                                <h1 class="q-company-name">PERFECT SECURITY SERVICES</h1>
+                                <p class="q-address">Gurukrupa Complex, Shop No. B/4, Parivar Park, Chandreshnagar Main Road,<br>Bakbon Chowk, RAJKOT-360 004.</p>
+                            </div>
+                            <div class="q-contact">
+                                <div>Mo. 70486 40686</div>
+                                <div>Mo. 79845 59325</div>
+                            </div>
                         </div>
-                        <div class="q-title-section">
-                            <h1 class="q-company-name">PERFECT SECURITY SERVICES</h1>
-                            <p class="q-address">Gurukrupa Complex, Shop No. B/4, Parivar Park, Chandreshnagar Main Road,<br>Bakbon Chowk, RAJKOT-360 004.</p>
+                        <div class="q-header-bottom-line"></div>
+                    </div>
+
+                    <!-- Meta (Ref and Date) -->
+                    <div class="q-meta">
+                        <div class="q-ref">
+                            <strong>Ref. No.</strong> <span id="outRefNo" class="dotted-underline"></span>
                         </div>
-                        <div class="q-contact">
-                            <div>Mo. 70486 40686</div>
-                            <div>Mo. 79845 59325</div>
+                        <div class="q-date">
+                            <strong>Dt.</strong> <span id="outDate" class="dotted-underline"></span>
                         </div>
                     </div>
-                    <div class="q-header-bottom-line"></div>
-                </div>
 
-                <!-- Meta (Ref and Date) -->
-                <div class="q-meta">
-                    <div class="q-ref">
-                        <strong>Ref. No.</strong> <span id="outRefNo" class="dotted-underline"></span>
+                    <!-- To Section -->
+                    <div class="q-to-section">
+                        <strong>To,</strong><br>
+                        <strong id="outToManager">The Manager,</strong><br>
+                        <div id="outToCompany" class="address-line"></div>
+                        <div id="outToAddressLine1" class="address-line"></div>
+                        <div id="outToAddressLine2" class="address-line"></div>
                     </div>
-                    <div class="q-date">
-                        <strong>Dt.</strong> <span id="outDate" class="dotted-underline"></span>
-                    </div>
-                </div>
 
-                <!-- To Section -->
-                <div class="q-to-section">
-                    <strong>To,</strong><br>
-                    <strong id="outToManager">The Manager,</strong><br>
-                    <div id="outToCompany" class="address-line"></div>
-                    <div id="outToAddressLine1" class="address-line"></div>
-                    <div id="outToAddressLine2" class="address-line"></div>
-                </div>
+                    <!-- Quotation Title -->
+                    <h2 class="q-quotation-title">Quotation of Rates for Security Personnel</h2>
 
-                <!-- Quotation Title -->
-                <h2 class="q-quotation-title">Quotation of Rates for Security Personnel</h2>
-
-                <!-- Rates List -->
-                <div class="q-rates-section">
-                    <ol class="q-rates-list">
-                        <li>
-                            <div class="rate-row">
-                                <span class="rate-name">Security Supervisor</span>
-                                <span class="rate-value" id="outRateSupervisor"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="rate-row">
-                                <span class="rate-name">Security Guard</span>
-                                <span class="rate-value" id="outRateGuard"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="rate-row">
-                                <span class="rate-name">Security Gun man</span>
-                                <span class="rate-value" id="outRateGunman"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="rate-row">
-                                <span class="rate-name">Ex. Man</span>
-                                <span class="rate-value" id="outRateExMan"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="rate-row">
-                                <span class="rate-name">Bouncer</span>
-                                <span class="rate-value" id="outRateBouncer"></span>
-                            </div>
-                        </li>
-                    </ol>
-                    <div class="q-gst-note">
-                        GST Application on Amount of Bill.
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="q-footer">
-                    <div class="q-footer-left">
-                        <ol>
-                            <li>Pan No. AOYPB5436K</li>
-                            <li>GST NO. 24AOYPB5436K1ZK</li>
-                            <li>P. F. Code No. 10000081305RAJ</li>
-                            <li>Licence No. 18013095 / RAJKOT</li>
+                    <!-- Rates List -->
+                    <div class="q-rates-section">
+                        <ol class="q-rates-list">
+                            <li>
+                                <div class="rate-row">
+                                    <span class="rate-name">Security Supervisor</span>
+                                    <span class="rate-value" id="outRateSupervisor"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="rate-row">
+                                    <span class="rate-name">Security Guard</span>
+                                    <span class="rate-value" id="outRateGuard"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="rate-row">
+                                    <span class="rate-name">Security Gun man</span>
+                                    <span class="rate-value" id="outRateGunman"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="rate-row">
+                                    <span class="rate-name">Ex. Man</span>
+                                    <span class="rate-value" id="outRateExMan"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="rate-row">
+                                    <span class="rate-name">Bouncer</span>
+                                    <span class="rate-value" id="outRateBouncer"></span>
+                                </div>
+                            </li>
                         </ol>
+                        <div class="q-gst-note">
+                            GST Application on Amount of Bill.
+                        </div>
                     </div>
-                    <div class="q-footer-right">
-                        <div class="q-for-company">FOR, PERFECT SECURITY SERVICES</div>
-                        <div class="q-proprietor">Proprietor</div>
+
+                    <!-- Footer -->
+                    <div class="q-footer">
+                        <div class="q-footer-left">
+                            <ol>
+                                <li>Pan No. AOYPB5436K</li>
+                                <li>GST NO. 24AOYPB5436K1ZK</li>
+                                <li>P. F. Code No. 10000081305RAJ</li>
+                                <li>Licence No. 18013095 / RAJKOT</li>
+                            </ol>
+                        </div>
+                        <div class="q-footer-right">
+                            <div class="q-for-company">FOR, PERFECT SECURITY SERVICES</div>
+                            <div class="q-signature-area" id="outSignatureArea">
+                                <img src="new1.png" alt="Authorized Signature" class="q-signature-img" id="outSignatureImg" style="display: none;">
+                            </div>
+                            <div class="q-proprietor">Proprietor</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>
